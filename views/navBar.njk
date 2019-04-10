@@ -1,0 +1,153 @@
+<style>
+
+    .topnav {
+        position: fixed;
+        width:100%;
+        z-index:1;
+        background-color: #FFF;
+        overflow: hidden;
+        height: 70px;
+        top:0px;
+        -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
+                                       -moz-animation: fadein 5s; /* Firefox < 16 */
+                                        -ms-animation: fadein 5s; /* Internet Explorer */
+                                         -o-animation: fadein 5s; /* Opera < 12.1 */
+                                            animation: fadein 5s;
+    }
+
+    .title {
+        float: left;
+        margin-left: 20px;
+        padding: 20px 0px;
+        width: auto;
+        height: 70px;
+        font-size: 30px;
+        font-family: "Avenir", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    }
+    @media (max-width: 799px) {
+         .btn{
+            background-color: #FFF;
+            text-transform: capitalize;
+            box-shadow: none;
+            height:70px;
+            padding:0 10px;
+            border: none;
+            outline:none;
+            float: right;
+            font-size: calc(10px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+            font-family: "Avenir", "Alegreya", "Cormorant Upright", "Avenir", monotype;
+            color: #000;
+         }
+     }
+     @media (min-width: 800px) {
+         .btn{
+                background-color: #FFF;
+                text-transform: lowercase;
+                box-shadow: none;
+                height:70px;
+                padding:0 20px;
+                border: none;
+                outline:none;
+                float: right;
+                font-size: calc(12px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+                font-family: "Avenir", "Alegreya", "Cormorant Upright", "Avenir", monotype;
+                color: #000;
+             }
+     }
+     .btn:hover {
+        background-color: #FFF;
+        box-shadow: none;
+        border: none;
+        outline:none;
+        color: #9cc345;
+     }
+     .btn:active {
+        background-color: #FFF;
+        box-shadow: none;
+        border: none;
+        outline:none;
+
+      }
+     .btn:focus {
+        background-color: #FFF;
+        box-shadow: none;
+        border: none;
+        outline:none;
+     }
+
+     .btn:focus:hover {
+        background-color: #FFF;
+        box-shadow: none;
+        border: none;
+        outline:none;
+     }
+     .fadein {
+         opacity: 1;
+         -moz-transition: opacity 1.5s;
+         -webkit-transition: opacity 1.5s;
+         -o-transition: opacity 1.5s;
+         transition: opacity 1.5s;
+     }
+
+     #body.unload .fadein {
+         opacity: 0;
+     }
+
+
+</style>
+
+
+<div class="topnav">
+    {% if (user) %}
+    <button class="btn waves-effect waves-light" id="logout" style="text-transform:lowercase">logout</button>
+
+    <button class="btn waves-effect waves-light" id="plants" style="text-transform:lowercase">my plants</button>
+
+    <button class="btn waves-effect waves-light" id="month" style="text-transform:lowercase">monthly</button>
+
+    <button class="btn waves-effect waves-light" id="week" style="text-transform:lowercase">weekly</button>
+
+    {% endif %}
+
+    <button class="btn waves-effect waves-light" id="home" style="float:left; margin-left:3vw">TO-DO GARDEN</button>
+
+</div>
+
+
+<script>
+
+    document.getElementById("home").onclick = function () {
+        $('body').fadeTo( "slow", 0 );
+        setTimeout(function () {
+            location.href = "/";
+        }, 500);    };
+
+    document.getElementById("week").onclick = function () {
+        $('body').fadeTo( "slow", 0 );
+        setTimeout(function () {
+            location.href = "/weekly";
+        }, 500);
+    };
+    document.getElementById("month").onclick = function () {
+        $('body').fadeTo( "slow", 0 );
+        setTimeout(function () {
+            location.href = "/monthly";
+        }, 500);
+    };
+    document.getElementById("plants").onclick = function () {
+        $('body').fadeTo( "slow", 0 );
+        setTimeout(function () {
+            location.href = "/myplants";
+        }, 500);
+    };
+    document.getElementById("logout").onclick = function () {
+        $('body').fadeTo( "slow", 0 );
+        setTimeout(function () {
+            location.href = "/3";
+        }, 500);
+    };
+
+
+
+
+</script>
