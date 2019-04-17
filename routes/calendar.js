@@ -3,6 +3,20 @@ var router = express.Router();
 var isAuthenticated = require('../middlewares/isAuthenticated')
 var User = require('../models/user.js')
 
+var findEvents = function(req, date, callback) {
+    User.findOne({username: req.session.user}, function (err, result) {
+        if (!err) {
+            for (let i = 0; i < result.events.length; i++) {
+                checkIfToday(result.events[i], function() {
+                    if (countT === result.tasks.length) {
+                        callback(null, tasks);
+                    }
+                });
+            }
+        }
+    })
+}
+
 router.get('/monthly', function (req, res) {
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -24,7 +38,15 @@ router.get('/monthly', function (req, res) {
             } else {
                 f++;
                 it++;
-                weekObj.days.push(it);
+                var thisDay = new Date(date.getFullYear(), date.getMonth(), it);
+                //query for events
+                findEvents(req, thisDay, function(events) {
+                    var day = {
+                        num: it,
+                        events: events
+                    }
+                    weekObj.days.push(day);
+                })
                 if (it === max) {
                     f = 0;
                 }
