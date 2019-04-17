@@ -22,7 +22,7 @@
   {% include './navBar.njk' %}
 
   <div class="form-container">
-    Add Task
+    Add Event
     <form method="POST" class="col s12">
     <div class="row">
           <div class="input-field col s6">
@@ -35,16 +35,25 @@
                 <input name="date" type="Date" class="validate">
               </div>
         </div>
+
+    <div class="row">
+                  <div class="input-field col s6">
+                    <input id="allday" name="allday" type="checkbox" />
+                    <label for="allday">All Day?</label>
+                  </div>
+            </div>
+    <div class="row">
+                  <div class="input-field col s6">
+                    <input id="start" name="start" type="time" class="validate">
+                  </div>
+                  <div class="input-field col s6">
+                                      <input id="end" name="end" type="time" class="validate">
+                                    </div>
+            </div>
     <div class="row">
               <div class="input-field col s6">
                 <input placeholder="choose a color" name="category" type="text" class="validate">
                 <label for="category">Category</label>
-              </div>
-        </div>
-    <div class="row">
-              <div class="input-field col s6">
-                <input placeholder="choose between 0 and 20" name="points" type="number" min="0" max="20" class="validate">
-                <label for="points">Points</label>
               </div>
         </div>
       <button type="submit">Submit</button>
@@ -56,4 +65,8 @@
 </html>
 
 <script>
+document.getElementById('allday').onchange = function() {
+    document.getElementById('start').disabled = this.checked;
+    document.getElementById('end').disabled = this.checked;
+};
 </script>

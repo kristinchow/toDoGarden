@@ -5,13 +5,16 @@ var cookieSession = require('cookie-session');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
+var Task = require('./models/task.js')
 
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/todogarden')
 
 var indexR = require("./routes/index");
 var accountRouter = require('./routes/account.js');
+var calendarRouter = require('./routes/calendar.js');
 var taskR = require('./routes/tasks.js');
+var eventsR = require('./routes/events.js');
 
 
 var app = express();
@@ -35,7 +38,8 @@ app.set("view engine", "njk");
 app.use("/", indexR);
 app.use('/', accountRouter)
 app.use('/', taskR);
-
+app.use('/', calendarRouter);
+app.use('/', eventsR);
 
 let nunjunksEnv = nunjucks.configure(path.join(__dirname, "views"), {
     autoescape: true,
@@ -60,6 +64,15 @@ nunjunksEnv.addFilter("niceDate", function(content) {
     return date;
 });
 
+nunjunksEnv.addFilter("completeTask", function(content) {
+    Task.findById(content, function (err, task) {
+        console.log(id);
+        if(!err) {
+            console.log(task);
+            return(task);
+        }
+    })
+})
 // don't put any routes below here!
 app.use(function (err, req, res, next) {
     return res.send('ERROR :  ' + err.message)

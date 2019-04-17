@@ -253,8 +253,6 @@
 </style>
 
 <div id="loader-wrapper">
-    <div id="loader"></div>
-
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
 
@@ -267,7 +265,34 @@
     <div class="subhead">here's what you have planned for today </div>
     <div class="largeTasks">
     <a id="add" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>ADD TASK</a>
+    {% for item in tasks %}
+        {% if (item.complete) %}
+        <br>
+        <a style="text-decoration: line-through; height:40px; float:left" class="waves-effect waves-light btn"><i class="material-icons left">check</i> {{item.name}}</a>
+        {% else %}
+        <br>
+        <a style="height:40px; float:left"id={{item.id}} onclick="check(this)" class="waves-effect waves-light btn"><i id={{ 'icon' + item.id }} class="material-icons left">crop_square</i><span> {{item.name}}</span></a>
+        {% endif %}
+    {% else %}
+        <br>
+        <span style="float:left">No tasks for today</span>
+    {% endfor %}
     </div>
+
+     <div class="largeTasks">
+        <a id="addevent" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>ADD Event</a>
+        {% for item in events %}
+            <br>
+            {% if (item.allDay) %}
+            <a style="height:40px; float:left"id={{item.id}} class="waves-effect waves-light btn"><span> All Day: {{item.name}}</span></a>
+            {% else %}
+             <a style="height:40px; float:left"id={{item.id}} class="waves-effect waves-light btn"><span> {{item.startTime}} - {{item.endTime}}: {{item.name}}</span></a>
+            {% endif %}
+        {% else %}
+            <br>
+            <span style="float:left">No events for today</span>
+        {% endfor %}
+        </div>
     {% else %}
     <div class="welcome">Welcome </div>
     <div class="subhead">want to get started? <br>
@@ -282,11 +307,29 @@
 </html>
 
 <script>
+
+function check(element) {
+    var id = element.id;
+    $(element).css({
+        'text-decoration': 'line-through'
+    })
+    document.getElementById('icon' + id).textContent="check";
+    $.ajax({
+        url: '/completeTask',
+        data: { taskID: id },
+        type: 'POST',
+        success: function(res) {
+        console.log(res)
+        }
+    })
+
+}
+
 $(document).ready(function() {
     setTimeout(function(){
         $('body').addClass('loaded');
         $('h1').css('color','#9cc345');
-    }, 1000);
+    }, 100);
 });
 
  document.getElementById("add").onclick = function () {
@@ -296,8 +339,11 @@ $(document).ready(function() {
         }, 500);
     };
 
-
-
-
+ document.getElementById("addevent").onclick = function () {
+        $('body').fadeTo( "slow", 0 );
+        setTimeout(function () {
+            location.href = "/addEvent";
+        }, 500);
+    };
 </script>
 
