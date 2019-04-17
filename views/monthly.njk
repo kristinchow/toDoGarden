@@ -93,73 +93,19 @@ a { color: blue; }
 
 {% for weekObj in weeks %}
 <div class="week">
-{% for item in weekObj.days %}
+{% for item in weekObj %}
     <div class="day">
-        {% if (item != 0) %}
-        <h3 class="day-label">{{item}}</h3>
+        {% if (item.num != 0) %}
+        <h3 class="day-label">{{item.num}}</h3>
+        {% for event in item.events %}
+            <div class="event event-end">{{event.name}}</div>
+        {% endfor %}
         {% endif %}
     </div>
 {% endfor %}
 </div>
 {% endfor %}
 
-<div class="week">
-  <div class="day">
-    <h3 class="day-label">1</h3>
-    <div class="event event-start event-end" data-span="2">Class</div>
-    <div class="event event-end">Interview</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">2</h3>
-    <div class="event event-start event-end" data-span="1">Dinner</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">3</h3>
-    <div class="event event-start event-end" data-span="2">School</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">4</h3>
-    <div class="event event-start" data-span="4">Meeting</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">5</h3>
-  </div>
-  <div class="day">
-    <h3 class="day-label">6</h3>
-  </div>
-  <div class="day">
-    <h3 class="day-label">7</h3>
-  </div>
-</div>
-
-<div class="week">
-  <div class="day">
-    <h3 class="day-label">1</h3>
-    <div class="event event-start event-end" data-span="2">Class</div>
-    <div class="event event-end">Interview</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">2</h3>
-    <div class="event event-start event-end" data-span="1">Dinner</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">3</h3>
-    <div class="event event-start event-end" data-span="2">School</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">4</h3>
-    <div class="event event-start" data-span="4">Meeting</div>
-  </div>
-  <div class="day">
-    <h3 class="day-label">5</h3>
-  </div>
-  <div class="day">
-    <h3 class="day-label">6</h3>
-  </div>
-  <div class="day">
-    <h3 class="day-label">7</h3>
-  </div>
-</div>
 </div>
 </html>
 
