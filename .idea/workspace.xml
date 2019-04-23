@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5cc1fc4-c4fc-4d1e-bd73-4f2197b87e61" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/views/add.njk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/goals.njk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/weekly.njk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/calendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/events.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tasks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/addEvent.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/addEvent.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/addTask.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/addTask.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/monthly.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/monthly.njk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/weekly.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/weekly.njk" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,15 +22,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="328">
               <caret line="141" column="6" lean-forward="true" selection-start-line="136" selection-start-column="4" selection-end-line="141" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -72,11 +53,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="weekly.njk" pinned="false" current-in-tab="true">
+      <file leaf-file-name="weekly.njk" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/weekly.njk">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="44" column="24" selection-start-line="44" selection-end-line="44" selection-end-column="24" />
+            <state relative-caret-position="148">
+              <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/users.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/models/user.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -140,8 +135,8 @@
       <find>diff</find>
       <find>router.post</find>
       <find>check</find>
-      <find>event.name</find>
       <find>event</find>
+      <find>event.name</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -261,18 +256,18 @@
       <option name="presentableId" value="Default" />
       <updated>1554868512237</updated>
       <workItem from="1554868514188" duration="187000" />
-      <workItem from="1555096425383" duration="90881000" />
+      <workItem from="1555096425383" duration="92333000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91068000" />
+    <option name="totallyTimeSpent" value="92520000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17758985" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17758985" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5003524" side_tool="true" weight="0.32904148" />
@@ -280,7 +275,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49964765" visible="true" weight="0.32904148" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49964765" visible="true" weight="0.32904148" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -310,16 +305,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -437,8 +422,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/weekly.njk">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="44" column="24" selection-start-line="44" selection-end-line="44" selection-end-column="24" />
+        <state relative-caret-position="148">
+          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
         </state>
       </provider>
     </entry>
