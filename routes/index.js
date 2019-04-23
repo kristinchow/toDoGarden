@@ -4,13 +4,6 @@ var User = require('../models/user.js')
 var Task = require('../models/task.js')
 var Event = require('../models/event.js')
 
-var tasks = [];
-var events = [];
-
-var countT = 0;
-var countE = 0;
-
-
 var checkIfEventToday = function(event, callback) {
     var today = new Date();
     Event.findById(event, function (err, event) {
@@ -18,28 +11,37 @@ var checkIfEventToday = function(event, callback) {
             if (event.date.getUTCDate() === today.getDate() &&
                 event.date.getUTCFullYear() === today.getFullYear() &&
                 event.date.getUTCMonth() === today.getMonth()) {
-                events.push(event);
+                callback(event);
+            } else {
+                callback(null);
             }
-            countE++;
+        } else {
+            callback(null);
         }
-        callback();
     })
 }
 
 function getEvents(req, callback) {
-    countE = 0;
+    var promises = [];
     User.findOne({username: req.session.user}, function (err, result) {
         if (!err) {
             for (let i = 0; i < result.events.length; i++) {
-                checkIfEventToday(result.events[i], function() {
-                    if (countE === result.events.length) {
-                        callback(null, events);
-                    }
+                var p = new Promise(function(resolve, reject) {
+                    checkIfEventToday(result.events[i], function (event) {
+                        if (event != null) {
+                            resolve(event);
+                        } else {
+                            resolve(null);
+                        }
+                    });
                 });
+                promises.push(p);
             }
         }
+        Promise.all(promises).then(function(values) {
+            callback(null, values);
+        });
     })
-
 }
 
 var checkIfToday = function(task, callback) {
@@ -49,53 +51,86 @@ var checkIfToday = function(task, callback) {
             if (task.date.getUTCDate() === today.getDate() &&
                 task.date.getUTCFullYear() === today.getFullYear() &&
                 task.date.getUTCMonth() === today.getMonth()) {
-                tasks.push(task);
+                callback(task);
+            } else {
+                callback(null);
             }
-            countT++;
+
+        } else {
+            callback(null);
         }
-        callback();
     })
 }
 
 function getTasks(req, callback) {
-    countT = 0;
-        User.findOne({username: req.session.user}, function (err, result) {
+    var promises = [];
+    User.findOne({username: req.session.user}, function (err, result) {
             if (!err) {
                 for (let i = 0; i < result.tasks.length; i++) {
-                    checkIfToday(result.tasks[i], function() {
-                        if (countT === result.tasks.length) {
-                            callback(null, tasks);
-                        }
+                    var p = new Promise(function(resolve, reject) {
+                        checkIfToday(result.tasks[i], function(task) {
+                            if (task != null) {
+                                resolve(task);
+                            } else {
+                                resolve(null);
+                            }
+                        });
                     });
+                    promises.push(p);
                 }
             }
-        })
+        Promise.all(promises).then(function(values) {
+            callback(null, values);
+        });
+    })
 
 }
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    tasks = [];
-    events = [];
+    var promises = []
     if (req.session.user && req.session.user.length > 0) {
-        getTasks(req, function (err, t) {
-            if (!err) {
-            getEvents(req, function (errE, e) {
-                if (!err && !errE) {
-                    res.render("index", {
-                        user: req.session.user,
-                        tasks: t,
-                        events: e
-                    });
+        var pT = new Promise(function(resolve, reject) {
+            getTasks(req, function (err, t) {
+                if (!err) {
+                    resolve(t);
                 } else {
-                    res.render("index", {
-                        user: req.session.user,
-                        tasks: [],
-                        events: []
-                    });
+                    reject;
                 }
-            })
+            });
+        })
+
+        var pE = new Promise(function(resolve, reject) {
+            getEvents(req, function (errE, e) {
+                if (!errE) {
+                    resolve(e);
+                } else {
+                    reject;
+                }
+            });
+        })
+        promises.push(pT);
+        promises.push(pE);
+
+        Promise.all(promises).then(function(values) {
+            var tasks = [];
+            for (let i = 0; i < values[0].length; i++) {
+                if (values[0][i] != null) {
+                    tasks.push(values[0][i]);
+                }
             }
+
+            var events = [];
+            for (let j = 0; j < values[1].length; j++) {
+                if (values[1][j] != null) {
+                    events.push(values[1][j])
+                }
+            }
+            res.render("index", {
+                user: req.session.user,
+                tasks: tasks,
+                events: events
+            });
         })
     } else {
         res.render("index", {

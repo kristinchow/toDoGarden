@@ -26,24 +26,30 @@
     <form method="POST" class="col s12">
     <div class="row">
           <div class="input-field col s6">
-            <input name="name" type="text" class="validate">
+            <input required="required" name="name" type="text" class="validate">
             <label for="name">Title</label>
           </div>
     </div>
     <div class="row">
               <div class="input-field col s6">
-                <input name="date" type="Date" class="validate">
+                <input required="required" id="date" name="date" type="Date" class="validate">
               </div>
         </div>
     <div class="row">
               <div class="input-field col s6">
-                <input placeholder="choose a color" name="category" type="text" class="validate">
-                <label for="category">Category</label>
-              </div>
+                                        <select name="category" id="category" required>
+                                          <option value="" disabled selected>Choose a category</option>
+                                          <option value="green">green</option>
+                                          <option value="blue">blue</option>
+                                          <option value="pink">pink</option>
+                                          <option value="orange">orange</option>
+                                        </select>
+                                        <label>Category</label>
+                                      </div>
         </div>
     <div class="row">
               <div class="input-field col s6">
-                <input placeholder="choose between 0 and 20" name="points" type="number" min="0" max="20" class="validate">
+                <input required="required" placeholder="choose between 0 and 20" name="points" type="number" min="0" max="20" class="validate">
                 <label for="points">Points</label>
               </div>
         </div>
@@ -56,4 +62,8 @@
 </html>
 
 <script>
+$(document).ready(function() {
+    $('select').material_select();
+    document.getElementById('date').valueAsDate = new Date();
+});
 </script>

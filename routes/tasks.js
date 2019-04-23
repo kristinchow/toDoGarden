@@ -10,7 +10,18 @@ router.post('/addTask', isAuthenticated, function (req, res, next) {
     var date = req.body.date;
     var points = req.body.points;
     var category = req.body.category;
-    var t = new Task({ name: name, date: date, complete: false, category: category, points: points });
+    var color;
+    if (category === 'green') {
+        color = '#C6E484';
+    } else if (category === 'blue') {
+        color = '#CDFFF5';
+    } else if (category === 'orange') {
+        color = '#F1D8AB'
+    } else if (category === 'pink') {
+        color = '#F1BDAB'
+    }
+    var t = new Task({ name: name, date: date, complete: false, category: color, points: points });
+
     t.save(function (err, result) {
         if (err) {
             next(err)

@@ -13,15 +13,64 @@
         font-size: calc(20px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
         font-family: "Avenir";
         width: 50%;
-        margin-top:5%;
         margin-left:10%;
+        position: absolute;
+        top: 80px;
+        left: 0;
+    }
+    .button-container {
+        margin-top:10%;
+        float: right;
+        margin-right: 30%;
     }
 </style>
 <html>
   <body>
   {% include './navBar.njk' %}
 
-  <div class="form-container">
+  <div class="button-container">
+  <button onclick="hideB(this)" name="taskb" >Task </button>
+  <button onclick="hideA(this)" name="eventb">Event</button>
+  </div>
+
+<div id="taskform" class="form-container">
+    Add Task
+    <form method="POST" class="col s12">
+    <input type="hidden" id="type" name="type" value="task" />
+    <div class="row">
+          <div class="input-field col s6">
+            <input name="name" type="text" class="validate">
+            <label for="name">Title</label>
+          </div>
+    </div>
+    <div class="row">
+              <div class="input-field col s6">
+                <input name="date" type="Date" class="validate">
+              </div>
+        </div>
+   <div class="row">
+                 <div class="input-field col s6">
+                                           <select name="category" id="category" required>
+                                             <option value="" disabled selected>Choose a category</option>
+                                             <option value="green">green</option>
+                                             <option value="blue">blue</option>
+                                             <option value="pink">pink</option>
+                                             <option value="orange">orange</option>
+                                           </select>
+                                           <label>Category</label>
+                                         </div>
+           </div>
+    <div class="row">
+              <div class="input-field col s6">
+                <input placeholder="choose between 0 and 20" name="points" type="number" min="0" max="20" class="validate">
+                <label for="points">Points</label>
+              </div>
+        </div>
+      <button type="submit">Submit</button>
+    </form>
+    </div>
+
+  <div style="visibility: hidden" id="eventform" class="form-container">
     Add Event
     <form method="POST" class="col s12">
     <div class="row">
@@ -32,7 +81,7 @@
     </div>
     <div class="row">
               <div class="input-field col s6">
-                <input required="required" name="date" id="date" type="Date" class="validate">
+                <input required="required" name="date" type="Date" class="validate">
               </div>
               <div class="input-field col s6">
                           <select name="category" id="category" required>
@@ -48,7 +97,7 @@
 
     <div class="row">
                   <div class="input-field col s6">
-                    <input id="allday" name="allday" type="checkbox" />
+                    <input required="required" id="allday" name="allday" type="checkbox" />
                     <label for="allday">All Day?</label>
                   </div>
             </div>
@@ -75,7 +124,17 @@ document.getElementById('allday').onchange = function() {
 };
 $(document).ready(function() {
     $('select').material_select();
-        document.getElementById('date').valueAsDate = new Date();
-
 });
+
+function hideA(x) {
+     document.getElementById("type").value = "task"
+     document.getElementById("taskform").style.visibility = "hidden";
+     document.getElementById("eventform").style.visibility = "visible";
+ }
+
+ function hideB(x) {
+     document.getElementById("type").value = "event"
+     document.getElementById("eventform").style.visibility = "hidden";
+     document.getElementById("taskform").style.visibility = "visible";
+ }
 </script>

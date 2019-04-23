@@ -1,0 +1,505 @@
+<html>
+
+<head>
+    {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">#}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+        $(function() {
+            $( "#startdate" ).datepicker();
+            $( "#enddate" ).datepicker();
+        });
+      </script>
+</head>
+
+
+<style>
+
+    #gender-chart, #income-graph, #users-graph {
+        height:300px;
+    }
+
+    .chart-container  {
+       margin-top:10px;
+       margin-bottom:30px;
+    }
+
+    .numChatContainer {
+        border-radius:7px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+        color: #FFF;
+        background-color: #8F8F8F;
+    }
+
+    .divider{
+        width:20px;
+        height:auto;
+        display:inline-block;
+    }
+
+    input {
+        text-align: center;
+    }
+
+    .bottom-space {
+         margin-bottom: 40px;
+    }
+
+    .btn{
+      background-color: #8F8F8F
+    }
+    .btn:hover {
+      background-color: #96CACC
+    }
+    .btn:focus {
+      background-color: #96CACC
+    }
+
+    #numChat, #totalUsers {
+        //margin-left:20px;
+        //background-color: skyblue;
+        border-radius:5px;
+        color: #FFF;
+        padding:10px;
+    }
+</style>
+
+<body class="page-background col-md-12">
+
+	<div style="padding: 0 50px 50px 50px"><center>
+
+		<div class="container col m8 offset-m2">
+
+            <div class="row">
+
+                    <div class="col s12">
+
+                        <hr style="width:75%">
+                        <div class="chart-container col s12">
+                            <h5 style="font-size:30px"> Goal </h5>
+                                <p class="bottom-space">
+                                <h5 class="center-align">
+                                   <button class="btn waves-effect waves-light" id="daily" onclick="dailyView()">30 days</button>
+                                   &nbsp;
+                                   <button class="btn waves-effect waves-light" id="monthly" onclick="monthlyView()">Monthly</button>
+                                   &nbsp;
+                                   <input type="text" style="border:1px solid #8F8F8F; width:100px; height:35px" id="startdate" value="start date">
+                                   -
+                                   <input type="text" style="border:1px solid #8F8F8F; width:100px; height:35px" id="enddate" value="end date">
+                                   <button class="btn waves-effect waves-light" id="range" onclick="rangeView()">Go
+                                       <i class="material-icons right"></i>
+                                   </button>
+                                </h5>
+                            <div style="margin-bottom:30px" id="users-graph" class="col s12"> </div>
+
+
+                        </div>
+
+                    </div>
+
+            </div>
+
+		</div>
+
+	</center></div>
+
+</body>
+
+
+
+<script src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+    google.charts.load("visualization", {packages:["corechart", "bar"]});
+    google.charts.setOnLoadCallback(draw);
+
+    function draw() {
+        var chart = new google.visualization.ColumnChart(document.getElementById('users-graph'));
+       // drawDailyUsersGraph(new Date(), userStats, 10);
+    }
+
+
+    function drawDailyUsersGraph(endDate, allStats, numDays) {
+        var colors = ["#A4E1E3", "#A4E1E3"];
+
+        var dataForTable = [['Days', 'Number Of Users', { role: 'style' }]];
+
+        var maxNumber = 0;
+
+        /*var numStats = allStats.length > numDays ? numDays + 1 : allStats.length; // If greater than 10 make it 11 which is 10 with loop , otherwise keep the length
+
+        Get the last elements of the array
+        var userStats = (numStats != 0) ? allStats.slice(allStats.length - numStats, allStats.length) : allStats;
+        console.log(userStats);*/
+
+        for (var i = numDays - 1; i >= 0; i--) {
+            //get date
+            var day = new Date(endDate);
+            day.setDate(day.getDate() - i);
+
+            var foundDay = false;
+
+            for(var j = 0; j < allStats.length; j++) {
+                // Go backwards...
+                var stat = allStats[j];
+                var number = stat.number;
+
+                // Date converting to nice format
+                var d = new Date(stat.day);
+
+                if (d.toDateString() === day.toDateString()) {
+                    var options = {month: "short", day: "2-digit"}
+                    var niceDate = d.toLocaleDateString('en-US', options);
+
+                    if(number > maxNumber) {
+                        maxNumber = number;
+                    }
+
+                    var index = j % 2; // Get if even or odd j and then color accordingly
+                    var color = colors[index];
+                    var dateToAdd = [niceDate, number, color];
+
+                    dataForTable.push(dateToAdd);
+                    foundDay = true;
+                    break;
+                }
+            }
+                    //didn't find day in data
+                    if (!foundDay) {
+                        var options = {month: "short", day: "2-digit"}
+                        var niceDate = day.toLocaleDateString('en-US', options);
+                        var color = "#A4E1E3";
+                        var dateToAdd = [niceDate, 0, color];
+
+                        dataForTable.push(dateToAdd);
+                    }
+        }
+
+        var data = google.visualization.arrayToDataTable(dataForTable);
+
+        var options = {
+            title: 'Users Per Day',
+            titleTextStyle: {
+                    //color: <string>,
+                    //fontName: <string>,
+                    fontSize: 15,
+                    bold: false,
+                    //italic: <boolean>
+            },
+            hAxis: {
+                slantedText:true,
+                slantedTextAngle:315,
+            },
+            vAxis: {
+                title: 'Number of Users',
+                format: "#",
+                viewWindow: {
+                    max: maxNumber + 3,
+                    min:0
+                }
+            },
+            legend: {
+                position: 'none'
+            }
+
+        };
+        chart.draw(data, options);
+    }
+
+    function dailyView() {
+         var allStats = JSON.parse(sessionStorage.getItem("stats"));
+         if(allStats.length != 0) {
+            drawDailyUsersGraph(new Date(), allStats, 30);
+         } else {
+            $("#users-graph").append("<div style='text-align:center; padding:20px; font-size:30px'>No User Stats to Display Yet</div>");
+         }
+    }
+
+    function monthlyView() {
+            var monthStatsHash = new Object();
+
+            // get data from browser database
+            var allStats = JSON.parse(sessionStorage.getItem("stats"));
+
+            if(allStats.length == 0) {
+                $("#users-graph").append("<div style='text-align:center; padding:20px; font-size:30px'>No User Stats to Display Yet</div>");
+                return;
+            }
+
+            var dataForTable = [['Months', 'Number Of Users', { role: 'style' }]];
+
+            var maxNumber = 0;
+            var numStats = allStats.length > 365 ? 366 : allStats.length;
+
+            // Get the last elements of the array
+            var userStats = (numStats != 0) ? allStats.slice(allStats.length - numStats, allStats.length) : allStats;
+
+            for(var i = 0; i < userStats.length; i++) {
+                // Go backwards...
+                var stat = userStats[i];
+                var number = stat.number;
+
+                // Date converting to nice format
+                var d = new Date(stat.day);
+                var options = {month: "short", year: "numeric"}
+                var niceDate = d.toLocaleDateString('en-US', options);
+                if (niceDate in monthStatsHash) {
+                    var curr = monthStatsHash[niceDate];
+                    monthStatsHash[niceDate] = curr + number;
+                }
+                else {
+                    monthStatsHash[niceDate] = number;
+                }
+            }
+
+            for(var key in monthStatsHash) {
+              var value = monthStatsHash[key];
+              var color = "#A4E1E3";
+              var dateToAdd = [key, value, color];
+              dataForTable.push(dateToAdd);
+
+              if(value > maxNumber) {
+                maxNumber = value;
+              }
+            }
+
+            var data = google.visualization.arrayToDataTable(dataForTable, );
+
+            var options = {
+                title: 'Users Per Month in the Last Year',
+                titleTextStyle: {
+                        //color: <string>,
+                        //fontName: <string>,
+                        fontSize: 15,
+                        bold: false,
+                        //italic: <boolean>
+                },
+                hAxis: {
+                    slantedText:true,
+                    slantedTextAngle:315,
+                },
+                vAxis: {
+                    title: 'Number of Users',
+                    format: "#",
+                    viewWindow: {
+                        max: maxNumber + 3  ,
+                        min:0
+                    }
+                },
+                chartArea: {
+                   top: 55,
+                   height: '60%'
+                },
+                legend: {
+                    position: 'none'
+                }
+
+            };
+            chart.draw(data, options);
+    }
+
+        function rangeMonthly(startDate, endDate, userStats) {
+            var monthStatsHash = new Object();
+
+            var dataForTable = [['Months', 'Number Of Users', { role: 'style' }]];
+
+            var maxNumber = 0;
+
+            for(var i = 0; i < userStats.length; i++) {
+                // Go backwards...
+                var stat = userStats[i];
+                var number = stat.number;
+
+                // Date converting to nice format
+                var d = new Date(stat.day);
+                if (d <= endDate && d >= startDate) {
+                    var options = {month: "short", year: "numeric"}
+                    var niceDate = d.toLocaleDateString('en-US', options);
+                    if (niceDate in monthStatsHash) {
+                        var curr = monthStatsHash[niceDate];
+                        monthStatsHash[niceDate] = curr + number;
+                    }
+                    else {
+                        monthStatsHash[niceDate] = number;
+                    }
+                }
+            }
+
+            for(var key in monthStatsHash) {
+              var value = monthStatsHash[key];
+              var color = "#A4E1E3";
+              var dateToAdd = [key, value, color];
+              dataForTable.push(dateToAdd);
+
+              if(value > maxNumber) {
+                maxNumber = value;
+              }
+            }
+
+            var data = google.visualization.arrayToDataTable(dataForTable, );
+
+            var options = {month: "long", day: "numeric", year: "numeric"};
+            var start = startDate.toLocaleDateString('en-US', options);
+            var end = endDate.toLocaleDateString('en-US', options);
+
+            var options = {
+                title: 'Users Per Month from ' + start + ' to ' + end,
+                titleTextStyle: {
+                        //color: <string>,
+                        //fontName: <string>,
+                        fontSize: 15,
+                        bold: false,
+                        //italic: <boolean>
+                },
+                hAxis: {
+                    slantedText:true,
+                    slantedTextAngle:315,
+                },
+                vAxis: {
+                    title: 'Number of Users',
+                    format: "#",
+                    viewWindow: {
+                        max: maxNumber + 3  ,
+                        min:0
+                    }
+                },
+                chartArea: {
+                   top: 55,
+                   height: '60%'
+                },
+                legend: {
+                    position: 'none'
+                }
+
+            };
+            chart.draw(data, options);
+        }
+
+        function rangeYearly(startDate, endDate, userStats) {
+            var yearStatsHash = new Object();
+
+            var dataForTable = [['Years', 'Number Of Users', { role: 'style' }]];
+
+            var maxNumber = 0;
+
+            for(var i = 0; i < userStats.length; i++) {
+                // Go backwards...
+                var stat = userStats[i];
+                var number = stat.number;
+
+                // Date converting to nice format
+                var d = new Date(stat.day);
+                if (d <= endDate && d >= startDate) {
+                    var options = {year: "numeric"}
+                    var niceDate = d.toLocaleDateString('en-US', options);
+
+                    if (niceDate in yearStatsHash) {
+                        var curr = yearStatsHash[niceDate];
+                        yearStatsHash[niceDate] = curr + number;
+                    }
+                    else {
+                        yearStatsHash[niceDate] = number;
+                    }
+                }
+            }
+
+            for(var key in yearStatsHash) {
+              var value = yearStatsHash[key];
+              var color = "#A4E1E3";
+              var dateToAdd = [key, value, color];
+              dataForTable.push(dateToAdd);
+
+              if(value > maxNumber) {
+                maxNumber = value;
+              }
+            }
+
+            var data = google.visualization.arrayToDataTable(dataForTable, );
+
+            var options = {month: "long", day: "numeric", year: "numeric"};
+            var start = startDate.toLocaleDateString('en-US', options);
+            var end = endDate.toLocaleDateString('en-US', options);
+
+            var options = {
+                title: 'Users Per Year from ' + start + ' to ' + end,
+                titleTextStyle: {
+                        //color: <string>,
+                        //fontName: <string>,
+                        fontSize: 15,
+                        bold: false,
+                        //italic: <boolean>
+                },
+                hAxis: {
+                    slantedText:true,
+                    slantedTextAngle:315,
+                },
+                vAxis: {
+                    title: 'Number of Users',
+                    format: "#",
+                    viewWindow: {
+                        max: maxNumber + 3  ,
+                        min:0
+                    }
+                },
+                legend: {
+                    position: 'none'
+                }
+
+            };
+            chart.draw(data, options);
+        }
+    function rangeView() {
+        var sd = document.getElementById('startdate').value;
+        var ed = document.getElementById('enddate').value;
+
+        //error checks
+        var timestampstart = Date.parse(sd);
+        var timestampend = Date.parse(ed);
+
+        if (isNaN(timestampstart) == false) {
+            var start = new Date(timestampstart);
+        }
+        else {
+            console.log('Invalid start date');
+            return;
+        }
+
+        if (isNaN(timestampend) == false) {
+            var end = new Date(timestampend);
+        }
+        else {
+            console.log('Invalid end date');
+            return;
+        }
+
+        //second date is before first
+        if(start > end) {
+            //should probably do something more useful
+            console.log("Second date is before first");
+            return;
+        }
+        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+        var daysBetween = Math.round(Math.abs((start.getTime() - end.getTime())/(oneDay)));
+
+        var allStats = JSON.parse(sessionStorage.getItem("stats"));
+
+        if(daysBetween < 30) {
+            drawDailyUsersGraph(end, allStats, daysBetween + 1);
+        }
+        else if(daysBetween < 366) {
+            rangeMonthly(start, end, allStats);
+        }
+        else {
+            rangeYearly(start, end, allStats);
+        }
+    }
+</script>
+
+</html>

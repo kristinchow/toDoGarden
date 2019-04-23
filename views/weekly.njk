@@ -35,13 +35,13 @@ visibility:visible;
 }
 
 .month {
-    width: 80%;
+    width: 90%;
     margin-top: 10%;
-    margin-left: 10%;
+    margin-left: 1%;
 }
 .week {
   display:grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-auto-flow: dense;
 }
 
@@ -71,14 +71,14 @@ background:none;
     font-family: "Avenir", "Alegreya", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 .week-day, .day-label, .event {
-  padding: 4px 10px;
+  padding: 0px 10px;
 }
 
 .event {
   background-color: #CCC;
   font-family: "Avenir", "Alegreya", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: calc(2px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-
+  float:left;
 }
 
 .event-end {
@@ -97,41 +97,40 @@ background:none;
   {% include './navBar.njk' %}
 
 <div class="month">
-    <span style="font-family:Avenir; font-size: 20px"id="todayDate"></span>
+
 <div style="margin-top:5%"class="week">
-  <div class="week-day">Sunday</div>
-  <div class="week-day">Monday</div>
-  <div class="week-day">Tuesday</div>
-  <div class="week-day">Wednesday</div>
-  <div class="week-day">Thursday</div>
-  <div class="week-day">Friday</div>
-  <div class="week-day">Saturday</div>
+  <div class="week-day"></div>
+  {% for day in week %}
+  <div class="week-day">{{day.month + " / " + day.num}}</div>
+  {% endfor %}
 </div>
 
-{% for weekObj in weeks %}
 <div class="week">
-{% for item in weekObj %}
+    <div class="day-label"> </div>
+{% for day in week %}
     <div class="day">
-        {% if (item.num != 0) %}
-        <button style="float:right" onclick="popup(this)" class="open">{{item.num}}</button>
-        <br>
-        <br>
-        {% for event in item.events %}
+        {% for event in day.events %}
             {% if event.allDay %}
-            <div style="background-color:white; border-width:1px; border-style:dashed;border-color:{{event.category}}" class="event event-end">{{event.name}}</div>
+            <div style="width:100%; background-color:{{event.category}}; border-width:1px; border-style:dashed;border-color:{{event.category}}" class="event event-end">{{event.name}}</div>
             {% endif %}
         {% endfor %}
-        {% for event in item.events %}
-        {% if (event.allDay) %}
-        {% else %}
-            <div style="background-color:{{event.category}}" class="event event-end">{{event.startTime + " " + event.name}}</div>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
     </div>
 {% endfor %}
 </div>
+
+{% for time in times %}
+<div class="week">
+    <div style="font-size:10px" class="day-label">{{time.time}}</div>
+    {% for day in time.days %}
+    <div id={{time.time + "," + day.num}} onclick="popup(this)" class="day">
+        {% for event in day.events %}
+            <div style="width:50%; background-color:{{event.category}}; border-width:5px; border-style:dashed;border-color:{{event.category}}" class="event event-end">{{event.name.substring(0, 9)}}</div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
 {% endfor %}
+
 </div>
 
 <div class="popup-overlay">
@@ -189,23 +188,26 @@ background:none;
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
-    document.getElementById('todayDate').textContent=monthNames[date.getMonth()] + " " +  date.getFullYear();
 
-    function add(x) {
-         $.ajax({
-                 url: '/add',
-                 data: { date: date },
-                 type: 'GET',
-                 success: function(res) {
-                    window.location.href="/add?date=" + date
-                 }
-             })
-    }
 
     function popup(hi) {
-        var day = $(hi).text();
-        var d = new Date(date.getFullYear(), date.getMonth(), day);
-        document.getElementById('date').valueAsDate = d;
+        var time = hi.id.substr(0, hi.id.indexOf(','));
+        var day = hi.id.substr(hi.id.indexOf(',') + 1);
+        var curr = date.getDay();
+        if (day < curr) {
+            var diff = curr - day;
+            var tDay = new Date();
+            tDay.setDate(date.getDate() - diff);
+            document.getElementById('date').valueAsDate = tDay;
+        } else if (day > curr) {
+            var diff = day - curr;
+            var tDay = new Date();
+            tDay.setDate(date.getDate() + diff);
+            document.getElementById('date').valueAsDate = tDay;
+        } else {
+            document.getElementById('date').valueAsDate = date;
+        }
+        document.getElementById('start').value = time;
         $(".popup, .popup-content").addClass("active");
     }
 
