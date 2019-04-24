@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5cc1fc4-c4fc-4d1e-bd73-4f2197b87e61" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/views/index.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.njk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/addTask.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/addTask.njk" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,11 +43,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.njk" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.njk" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.njk">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
               <caret line="362" column="38" selection-start-line="362" selection-start-column="38" selection-end-line="362" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addTask.njk" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/addTask.njk">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="45" column="52" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -128,6 +137,7 @@
       <find>day-label</find>
       <find>else i</find>
       <find>utc</find>
+      <find>add</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,7 +158,6 @@
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/account.js" />
         <option value="$PROJECT_DIR$/routes/events.js" />
-        <option value="$PROJECT_DIR$/views/addTask.njk" />
         <option value="$PROJECT_DIR$/models/task.js" />
         <option value="$PROJECT_DIR$/routes/tasks.js" />
         <option value="$PROJECT_DIR$/routes/calendar.js" />
@@ -159,6 +168,7 @@
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/views/plants.njk" />
         <option value="$PROJECT_DIR$/views/index.njk" />
+        <option value="$PROJECT_DIR$/views/addTask.njk" />
       </list>
     </option>
   </component>
@@ -272,12 +282,12 @@
       <option name="presentableId" value="Default" />
       <updated>1554868512237</updated>
       <workItem from="1554868514188" duration="187000" />
-      <workItem from="1555096425383" duration="106827000" />
+      <workItem from="1555096425383" duration="107453000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107014000" />
+    <option name="totallyTimeSpent" value="107640000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -365,13 +375,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="14" selection-start-line="7" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/addTask.njk">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
-          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="43" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -498,6 +501,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="362" column="38" selection-start-line="362" selection-start-column="38" selection-end-line="362" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/addTask.njk">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="45" column="52" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
         </state>
       </provider>
     </entry>

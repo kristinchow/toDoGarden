@@ -38,12 +38,12 @@
     <div class="row">
               <div class="input-field col s6">
                                         <select name="category" id="category" required>
-                                          <option value="" disabled selected>Choose a category</option>
+                                          <option value="" disabled selected>Choose a Plant</option>
                                           {% for plant in plants %}
                                           <option value={{plant.id}}>{{plant.name}}</option>
                                           {% endfor %}
                                         </select>
-                                        <label>Category</label>
+                                        <label>Plant</label>
                                       </div>
         </div>
     <div class="row">
