@@ -5,7 +5,7 @@ var User = require('../models/user.js')
 var Event = require('../models/event.js')
 var Task = require('../models/task.js')
 
-router.post('/add', isAuthenticated, function (req, res, next) {
+/*router.post('/add', isAuthenticated, function (req, res, next) {
     var type = req.body.type;
     if (type === "task") {
         var user = req.session.user;
@@ -87,7 +87,7 @@ router.post('/add', isAuthenticated, function (req, res, next) {
 
 router.get('/add', isAuthenticated, function (req, res) {
     res.render('add', { user: req.session.user });
-})
+})*/
 
 
 router.post('/addEvent', isAuthenticated, function (req, res, next) {

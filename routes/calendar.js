@@ -46,7 +46,7 @@ function getEvents(req, date, callback) {
     })
 }
 
-router.get('/weekly', function (req, res) {
+router.get('/weekly', isAuthenticated, function (req, res) {
     var date = new Date();
 
     var days = [];
@@ -284,7 +284,7 @@ router.get('/weekly', function (req, res) {
 });
 
 
-router.get('/monthly', function (req, res) {
+router.get('/monthly', isAuthenticated, function (req, res) {
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -473,7 +473,7 @@ router.post('/monthly', isAuthenticated, function (req, res, next) {
     })
 })
 
-router.get('/goals', function (req, res) {
+router.get('/goals', isAuthenticated, function (req, res) {
     res.render('goals', {
         user: req.session.user
     })

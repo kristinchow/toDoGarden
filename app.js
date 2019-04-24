@@ -15,6 +15,7 @@ var accountRouter = require('./routes/account.js');
 var calendarRouter = require('./routes/calendar.js');
 var taskR = require('./routes/tasks.js');
 var eventsR = require('./routes/events.js');
+var plantsR = require('./routes/plants.js');
 
 
 var app = express();
@@ -40,6 +41,7 @@ app.use('/', accountRouter)
 app.use('/', taskR);
 app.use('/', calendarRouter);
 app.use('/', eventsR);
+app.use('/', plantsR);
 
 let nunjunksEnv = nunjucks.configure(path.join(__dirname, "views"), {
     autoescape: true,

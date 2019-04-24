@@ -1,0 +1,154 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<style>
+.popup-overlay {
+  visibility:hidden;
+  background:#ffffff;
+  border:3px solid #666666;
+  top:20%;
+  width:50%;
+  height:50%;
+  left:25%;
+  position:absolute;
+}
+
+.popup-content {
+    visibility:hidden;
+    background:#ffffff;
+    border:3px solid #666666;
+}
+.popup-overlay.active{
+  visibility:visible;
+  text-align:center;
+}
+
+.popup-content.active {
+visibility:visible;
+}
+
+.month {
+    width: 90%;
+    margin-top: 10%;
+    margin-left: 1%;
+}
+.week {
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+}
+
+.day {
+  border-style: none solid solid none;
+  border-width: 1px;
+}
+
+.day-label {
+  grid-row-start: 1;
+  text-align: center;
+  font-size: calc(10px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-family: "Avenir", "Alegreya", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  margin-bottom:10%;
+}
+
+.open {
+background:none;
+    grid-row-start: 1;
+  text-align: right;
+  font-size: calc(10px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-family: "Avenir", "Alegreya", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  border:none;
+}
+.week-day {
+    font-size: calc(8px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+    font-family: "Avenir", "Alegreya", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+.week-day, .day-label, .event {
+  padding: 0px 10px;
+}
+
+.event {
+  background-color: #CCC;
+  font-family: "Avenir", "Alegreya", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: calc(2px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  float:left;
+}
+
+.event-end {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.event-start {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.plant1 {
+    height:300px;
+    width:300px;
+
+}
+
+</style>
+
+<html>
+  {% include './navBar.njk' %}
+
+<div class="month">
+
+
+<div class="week">
+{% for plant in plants %}
+    <div class="day-label">
+        {% if plant.type == "1" %}
+            <img id={{plant.points}} class="plant1"> </img>
+        {% endif %}
+
+    </div>
+
+{% endfor %}
+</div>
+
+<div class="week">
+{% for plant in plants %}
+    <div style="border: dotted" class="day-label">
+        {{plant.name}}
+        <br>
+        {{ "Points: "  + plant.points}}
+    </div>
+
+{% endfor %}
+</div>
+
+</div>
+
+</html>
+
+<script>
+    var date = new Date();
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    $(document).ready(function() {
+        var plants = document.getElementsByClassName('plant1');
+        for (let i = 0; i < plants.length; i++) {
+            var plant = plants[i];
+            if (plant.id === "0") {
+                plant.src="./images/Plant1Stage1.png"
+            } else if (plant.id < 100) {
+                plant.src="./images/Plant1Stage2.png"
+            } else {
+                plant.src="./images/Plant1Stage3.png"
+            }
+        }
+    });
+</script>

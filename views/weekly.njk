@@ -196,16 +196,15 @@ background:none;
         var curr = date.getDay();
         if (day < curr) {
             var diff = curr - day;
-            var tDay = new Date();
-            tDay.setDate(date.getDate() - diff);
+            var tDay = new Date(date.getFullYear(), date.getMonth(), date.getDate() - diff);
             document.getElementById('date').valueAsDate = tDay;
         } else if (day > curr) {
             var diff = day - curr;
-            var tDay = new Date();
-            tDay.setDate(date.getDate() + diff);
+            var tDay = new Date(date.getFullYear(), date.getMonth(), date.getDate() + diff);
             document.getElementById('date').valueAsDate = tDay;
         } else {
-            document.getElementById('date').valueAsDate = date;
+            var tDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            document.getElementById('date').valueAsDate = tDay;
         }
         document.getElementById('start').value = time;
         $(".popup, .popup-content").addClass("active");

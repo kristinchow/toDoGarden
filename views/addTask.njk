@@ -39,10 +39,9 @@
               <div class="input-field col s6">
                                         <select name="category" id="category" required>
                                           <option value="" disabled selected>Choose a category</option>
-                                          <option value="green">green</option>
-                                          <option value="blue">blue</option>
-                                          <option value="pink">pink</option>
-                                          <option value="orange">orange</option>
+                                          {% for plant in plants %}
+                                          <option value={{plant.id}}>{{plant.name}}</option>
+                                          {% endfor %}
                                         </select>
                                         <label>Category</label>
                                       </div>
