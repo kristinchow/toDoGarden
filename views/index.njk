@@ -299,6 +299,9 @@
             <span style="float:left">No events for today</span>
         {% endfor %}
         </div>
+      <div class="largeTasks">
+             <a id="addplant" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>ADD Plant</a>
+      </div>
     {% else %}
     <div class="welcome">Welcome </div>
     <div class="subhead">want to get started? <br>
@@ -351,6 +354,13 @@ $(document).ready(function() {
         $('body').fadeTo( "slow", 0 );
         setTimeout(function () {
             location.href = "/addEvent";
+        }, 500);
+    };
+
+document.getElementById("addplant").onclick = function () {
+        $('body').fadeTo( "slow", 0 );
+        setTimeout(function () {
+            location.href = "/addPlant";
         }, 500);
     };
 
