@@ -37,11 +37,11 @@ visibility:visible;
 .month {
     width: 90%;
     margin-top: 10%;
-    margin-left: 1%;
+    margin-left: 5%;
 }
 .week {
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-auto-flow: dense;
 }
 
@@ -91,7 +91,7 @@ background:none;
   border-bottom-left-radius: 10px;
 }
 
-.plant1 {
+.plant1, .plant2 {
     height:300px;
     width:300px;
 
@@ -111,7 +111,12 @@ background:none;
         {% if plant.type == "1" %}
             <img id={{plant.points}} class="plant1"> </img>
         {% endif %}
-
+        {% if plant.type == "2" %}
+            <img id={{plant.points}} class="plant2"> </img>
+        {% endif %}
+        {% if plant.type == "3" %}
+            <img id={{plant.points}} class="plant3"> </img>
+        {% endif %}
     </div>
 
 {% endfor %}
@@ -126,6 +131,7 @@ background:none;
     </div>
 
 {% endfor %}
+
 </div>
 
 </div>
@@ -150,5 +156,17 @@ background:none;
                 plant.src="./images/Plant1Stage3.png"
             }
         }
+        var plants2 = document.getElementsByClassName('plant2');
+        for (let i = 0; i < plants2.length; i++) {
+            var plant = plants2[i];
+            if (plant.id === "0") {
+                plant.src="./images/Plant2Stage1.png"
+            } else if (plant.id < 100) {
+                plant.src="./images/Plant2Stage2.png"
+            } else {
+                plant.src="./images/Plant2Stage3.png"
+            }
+        }
+
     });
 </script>

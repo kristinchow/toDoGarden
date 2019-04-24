@@ -1,0 +1,57 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<style>
+    .form-container {
+        font-size: calc(20px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+        font-family: "Avenir";
+        width: 50%;
+        margin-top:5%;
+        margin-left:10%;
+    }
+</style>
+<html>
+  <body>
+  {% include './navBar.njk' %}
+
+  <div class="form-container">
+    Add Plant
+    <form method="POST" class="col s12">
+    <div class="row">
+          <div class="input-field col s6">
+            <input required="required" name="name" type="text" class="validate">
+            <label for="name">Name</label>
+          </div>
+    </div>
+    <div class="row">
+              <div class="input-field col s6">
+                          <select name="type" id="type" required>
+                            <option value="" disabled selected>Choose a plant type</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                          </select>
+                          <label>Plant Type</label>
+                        </div>
+        </div>
+      <button type="submit">Submit</button>
+    </form>
+    </div>
+  </body>
+
+
+</html>
+
+<script>
+
+$(document).ready(function() {
+    $('select').material_select();
+});
+</script>
