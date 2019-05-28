@@ -8,7 +8,7 @@ var nunjucks = require('nunjucks');
 var Task = require('./models/task.js')
 
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/todogarden')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/tinyplanner')
 
 var indexR = require("./routes/index");
 var accountRouter = require('./routes/account.js');
