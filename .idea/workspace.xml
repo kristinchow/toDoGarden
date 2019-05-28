@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5cc1fc4-c4fc-4d1e-bd73-4f2197b87e61" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/TinyPlannerLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/navBar.njk" beforeDir="false" afterPath="$PROJECT_DIR$/views/navBar.njk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/TinyPlannerLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/TinyPlannerLogo.png" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -66,8 +64,8 @@
       <file leaf-file-name="navBar.njk" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/navBar.njk">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+            <state relative-caret-position="226">
+              <caret line="111" selection-start-line="111" selection-end-line="123" />
             </state>
           </provider>
         </entry>
@@ -262,12 +260,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -295,12 +293,12 @@
       <workItem from="1554868514188" duration="187000" />
       <workItem from="1555096425383" duration="108146000" />
       <workItem from="1559008896973" duration="779000" />
-      <workItem from="1559009691806" duration="237000" />
+      <workItem from="1559009691806" duration="560000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109349000" />
+    <option name="totallyTimeSpent" value="109672000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -652,8 +650,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/navBar.njk">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+        <state relative-caret-position="226">
+          <caret line="111" selection-start-line="111" selection-end-line="123" />
         </state>
       </provider>
     </entry>
