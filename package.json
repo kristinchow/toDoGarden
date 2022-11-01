@@ -13,7 +13,7 @@
     "ejs": "^2.6.1",
     "express": "~4.16.0",
     "form-serializer": "^2.5.0",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "gulp-eslint": "^2.0.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
